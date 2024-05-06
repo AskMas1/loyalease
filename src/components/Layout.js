@@ -11,19 +11,19 @@ function Layout({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
   const userMenu = [
+    // {
+    //   name: "Home",
+    //   path: "/",
+    //   icon: "ri-home-line",
+    // },
+    // {
+    //   name: "Appointments",
+    //   path: "/appointments",
+    //   icon: "ri-file-list-line",
+    // },
     {
-      name: "Home",
-      path: "/",
-      icon: "ri-home-line",
-    },
-    {
-      name: "Appointments",
-      path: "/appointments",
-      icon: "ri-file-list-line",
-    },
-    {
-      name: "Apply Doctor",
-      path: "/apply-doctor",
+      name: "Update Password",
+      path: "/update-password",
       icon: "ri-hospital-line",
     }
   ];
@@ -47,26 +47,26 @@ function Layout({ children }) {
   ];
 
   const adminMenu = [
-    {
-      name: "Home",
-      path: "/",
-      icon: "ri-home-line",
-    },
+    // {
+    //   name: "Home",
+    //   path: "/",
+    //   icon: "ri-home-line",
+    // },
     {
       name: "Users",
       path: "/admin/userslist",
       icon: "ri-user-line",
     },
-    {
-      name: "Doctors",
-      path: "/admin/doctorslist",
-      icon: "ri-user-star-line",
-    },
-    {
-      name: "Profile",
-      path: "/profile",
-      icon: "ri-user-line",
-    },
+    // {
+    //   name: "Doctors",
+    //   path: "/admin/doctorslist",
+    //   icon: "ri-user-star-line",
+    // },
+    // {
+    //   name: "Profile",
+    //   path: "/profile",
+    //   icon: "ri-user-line",
+    // },
   ];
 
   const menuToBeRendered = user?.isAdmin ? adminMenu : user?.isDoctor ? doctorMenu : userMenu;
@@ -76,7 +76,7 @@ function Layout({ children }) {
       <div className="d-flex layout">
         <div className="sidebar">
           <div className="sidebar-header">
-            <h1 className="logo">SH</h1>
+            <h1 className="logo">Flipr</h1>
             <h1 className="role">{role}</h1>
           </div>
 
@@ -121,7 +121,7 @@ function Layout({ children }) {
               ></i>
             )}
 
-            <div className="d-flex align-items-center px-4">
+            {/* <div className="d-flex align-items-center px-4">
               <Badge
                 count={user?.unseenNotifications.length}
                 onClick={() => navigate("/notifications")}
@@ -132,7 +132,7 @@ function Layout({ children }) {
               <Link className="anchor mx-2" to="/profile">
                 {user?.name}
               </Link>
-            </div>
+            </div> */}
           </div>
 
           <div className="body">{children}</div>

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import Layout from "../../components/Layout";
 import { showLoading, hideLoading } from "../../redux/alertsSlice";
 import axios from "axios";
+import {toast} from 'react-hot-toast'
 import { Table } from "antd";
 import moment from "moment";
 
@@ -26,6 +27,29 @@ function Userslist() {
     }
   };
 
+  const changeUserStatus = async (record, status) => {
+    try {
+      dispatch(showLoading());
+      const resposne = await axios.post(
+        "/api/admin/change-doctor-account-status",
+        { usersId: record._id, userId: record.userId, status: status },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      dispatch(hideLoading());
+      if (resposne.data.success) {
+        toast.success(resposne.data.message);
+        getUsersData();
+      }
+    } catch (error) {
+      toast.error('Error in Deleting User');
+      dispatch(hideLoading());
+    }
+  };
+
   useEffect(() => {
     getUsersData();
   }, []);
@@ -45,11 +69,17 @@ function Userslist() {
       render: (record , text) => moment(record.createdAt).format("DD-MM-YYYY"),
     },
     {
+      title: "status",
+      dataIndex: "status",
+    },
+    {
       title: "Actions",
       dataIndex: "actions",
       render: (text, record) => (
         <div className="d-flex">
-          <h1 className="anchor">Block</h1>
+          
+          <h1 className="anchor"
+          onClick={()=>changeUserStatus(record,"blocked")} >Delete</h1>
         </div>
       ),
     },
